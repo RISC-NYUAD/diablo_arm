@@ -47,8 +47,8 @@ class DiabloControlPlugin: public gazebo::ModelPlugin
 	  	this->roll_cmd = 0.0;
 	  	LIM_ = 10.0;
 	  	this->Kp = 250.0;
-	  	this->Kd = 10.0;
-	  	this->Ki = 70.0;
+	  	this->Kd = 50.0;
+	  	this->Ki = 10.0;
 	  	this->vel_int = 0.0;
       this->JUMP_hstar = 0.5;
       this->JUMPING = false;
@@ -57,7 +57,13 @@ class DiabloControlPlugin: public gazebo::ModelPlugin
       std::string ns;
       if(_sdf->HasElement("namespace"))
         ns = _sdf->GetElement("namespace")->Get<std::string>();							
-        
+      if(_sdf->HasElement("Kp"))
+        this->Kp = _sdf->GetElement("Kp")->Get<double>();						
+      if(_sdf->HasElement("Kd"))
+        this->Kd = _sdf->GetElement("Kd")->Get<double>();						
+      if(_sdf->HasElement("Ki"))
+        this->Ki = _sdf->GetElement("Ki")->Get<double>();
+               
       this->base_link = this->model->GetLink(ns+"::Body");		
       
       std::string vel_topic = ns + "/vel_cmd" ;
@@ -98,7 +104,7 @@ class DiabloControlPlugin: public gazebo::ModelPlugin
       }if((this->vel_int)<-0.2){
         this->vel_int = -0.2;
       }
-      double des_pitch = 0.04*smooth_x_vel -1.0*vel_error - 0.1*(this->vel_int);
+      double des_pitch = 0.02*smooth_x_vel -0.5*vel_error - 0.03*(this->vel_int);
       
       // double ang_vel_error = ang_vel.Z() - (this->ang_z_cmd) ;
       // double des_ang_z_rate = -1.2*ang_vel_error ;

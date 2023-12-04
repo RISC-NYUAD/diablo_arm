@@ -13,7 +13,7 @@ def generate_launch_description():
     world_path = os.path.join(share_dir, 'worlds', world_file_name)
 
     gazebo_models_path = os.path.join(share_dir, 'models')
-    os.environ["GAZEBO_MODEL_PATH"] = gazebo_models_path
+    os.environ["GAZEBO_MODEL_PATH"] += os.pathsep + gazebo_models_path
 
     plugins_dir = FindPackageShare(package='diablo_gazebo_plugin').find('diablo_gazebo_plugin')
     gazebo_plugins_path = os.path.join(plugins_dir, 'diablo_gazebo_plugin')
@@ -28,9 +28,9 @@ def generate_launch_description():
             ])
         ]),
         launch_arguments={
-            'pause': 'false',
+            'pause': 'true',
             'world': world_path,
-            'verbose': 'false'
+            'verbose': 'true'
         }.items()
     )
 

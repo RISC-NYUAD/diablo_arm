@@ -9,7 +9,7 @@ from launch_ros.actions import Node
 def generate_launch_description():
     share_dir = FindPackageShare(package='diablo_simulation').find('diablo_simulation')
 
-    world_file_name = 'diablo_arm.world'
+    world_file_name = 'diablo_stick.world'
     world_path = os.path.join(share_dir, 'worlds', world_file_name)
 
     gazebo_models_path = os.path.join(share_dir, 'models')
