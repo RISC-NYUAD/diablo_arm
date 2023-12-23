@@ -23,9 +23,8 @@ def generate_launch_description():
             ])
         ]),
         launch_arguments={
-            'pause': 'true',
+            'pause': 'false',
             'world': world_path,
-            'verbose': 'false'
         }.items()
     )
 
