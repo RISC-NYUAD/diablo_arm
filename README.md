@@ -11,7 +11,7 @@ sudo apt install xterm
 ```
 mkdir -p ~/ros2_ws/src
 cd ~/ros2_ws/src
-git clone https://github.com/Abanesjo/diablo_arm.git
+git clone https://github.com/RISC-NYUAD/diablo_arm
 cd ..
 sudo apt-get update
 rosdep update --rosdistro=foxy
